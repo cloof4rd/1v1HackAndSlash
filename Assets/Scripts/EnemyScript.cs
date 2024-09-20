@@ -7,7 +7,7 @@ public class EnemyScript : MonoBehaviour, IDamageable
     public float healthPool = 10f;
     public float moveSpeed = 50f;    // Increased movement speed for rapid movement
     public float jumpForce = 25f;    // Increased jump force for higher jumps
-    public float attackIntervalMin = 1f;  // Minimum time between attacks
+    public float attackIntervalMin = 0.5f;  // Minimum time between attacks
     public float attackIntervalMax = 3f;  // Maximum time between attacks
     public float respawnTime = 2f;  // Time in seconds to respawn after death
     public LayerMask groundLayer;   // Layer used to detect the ground

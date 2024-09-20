@@ -100,6 +100,8 @@ public class Player1Script : MonoBehaviour, IDamageable
     {
         if (attemptMeleeAttack && timeUntilMeleeReadied <= 0)
         {
+            Debug.Log("Player attacking");
+
             if (attackSound != null)
             {
                 attackSound.Play();
@@ -107,17 +109,23 @@ public class Player1Script : MonoBehaviour, IDamageable
 
             animator.SetTrigger("Slash");
 
-            // Check for enemies (or Player 2) in the attack radius
             Collider2D[] hitObjects = Physics2D.OverlapCircleAll(meleeAttackOrigin.position, meleeAttackRadius, enemyLayer);
+            Debug.Log("Number of hit objects: " + hitObjects.Length);
+
             for (int i = 0; i < hitObjects.Length; i++)
             {
-                IDamageable target = hitObjects[i].GetComponent<IDamageable>();
-                if (target != null)
+                // Skip the player itself to prevent self-damage
+                if (hitObjects[i].gameObject != this.gameObject)
                 {
-                    target.ApplyDamage(meleeDamage); // Apply damage
-                    if (hitSound != null)
+                    IDamageable target = hitObjects[i].GetComponent<IDamageable>();
+                    if (target != null)
                     {
-                        hitSound.Play();
+                        Debug.Log("Enemy or player hit: " + hitObjects[i].name);
+                        target.ApplyDamage(meleeDamage); // Apply damage
+                        if (hitSound != null)
+                        {
+                            hitSound.Play();
+                        }
                     }
                 }
             }

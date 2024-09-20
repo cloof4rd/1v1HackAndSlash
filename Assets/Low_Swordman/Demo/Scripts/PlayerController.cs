@@ -112,8 +112,6 @@ public abstract class PlayerController :MonoBehaviour
         m_CapsulleCollider.enabled = true;
     }
 
-
-    //////바닥 체크 레이케스트 
     Vector2 RayDir = Vector2.down;
 
 
